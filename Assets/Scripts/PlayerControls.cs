@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 using UnityEngine;
 
-public class PlayerControls : MonoBehaviour {
+public class PlayerControls : NetworkBehaviour {
 
     private Transform cam;
     private float yRotation, xRotation, currentXRotation, currentYRotation, yRotationV, xRotationV;
@@ -20,15 +21,22 @@ public class PlayerControls : MonoBehaviour {
     // Use this for initialization
     void Start () {
         cam = GetComponentInChildren<Camera>().transform;
+        if (!isLocalPlayer)
+        {
+            cam.gameObject.SetActive(false);
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
-        mouselook();
-        movement();
+        if (isLocalPlayer)
+        {
+            Mouselook();
+            Movement();
+        }
     }
 
-    void movement()
+    void Movement()
     {
         //Movement
         CharacterController controller = GetComponent<CharacterController>();
@@ -45,7 +53,7 @@ public class PlayerControls : MonoBehaviour {
         controller.Move(moveDirection * Time.deltaTime);
     }
 
-    void mouselook()
+    void Mouselook()
     {
         yRotation += Input.GetAxis("Mouse X") * lookSensitivity;
         xRotation -= Input.GetAxis("Mouse Y") * lookSensitivity;
