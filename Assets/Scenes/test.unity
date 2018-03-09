@@ -343,6 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1475683980}
   - component: {fileID: 1475683979}
+  - component: {fileID: 1475683981}
   m_Layer: 0
   m_Name: TestEnemy
   m_TagString: Untagged
@@ -361,7 +362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23d1efb310ad6e49b892d702c711b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
 --- !u!4 &1475683980
 Transform:
   m_ObjectHideFlags: 0
@@ -376,6 +376,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1475683981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475683978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a37e2d8f6a694ee4fbd482d1d205ac50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  speed: 1
+  reach: 5
+  timer: 0
+  damage: 5
+  dead: 0
 --- !u!1 &1542754772
 GameObject:
   m_ObjectHideFlags: 0
