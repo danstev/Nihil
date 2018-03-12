@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class PlayerControls : NetworkBehaviour {
 
+    //Mouse look
     private Transform cam;
+    private Transform gui;
     private float yRotation, xRotation, currentXRotation, currentYRotation, yRotationV, xRotationV;
     public float lookSensitivity = 5;
     public float lookSmoothnes = 0.1f;
@@ -18,22 +20,49 @@ public class PlayerControls : NetworkBehaviour {
     public float gravity = 20.0F;
     private Vector3 moveDirection = Vector3.zero;
 
+    //Timers
+    public float attackTimer = 1.0f;
+
+    //Menu
+    public GameObject menu;
+
     // Use this for initialization
-    void Start () {
+    void Start() {
         cam = GetComponentInChildren<Camera>().transform;
+        gui = transform.Find("GUI");
         if (!isLocalPlayer)
         {
             cam.gameObject.SetActive(false);
+            gui.gameObject.SetActive(false);
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
+
         if (isLocalPlayer)
         {
             Mouselook();
             Movement();
+            Timers();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Attack();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                MainMenu();
+            }
         }
+
+    }
+
+    void MainMenu()
+    {
+        menu.SetActive(!menu.activeSelf);
+        Debug.Log("Menu opened or closed.");
     }
 
     void Movement()
@@ -74,5 +103,32 @@ public class PlayerControls : NetworkBehaviour {
 
         transform.rotation = Quaternion.Euler(0, currentYRotation, 0);
         cam.transform.rotation = Quaternion.Euler(currentXRotation, currentYRotation, 0);
+    }
+
+    void Attack()
+    {
+        if (attackTimer <= 0)
+        {
+            Debug.Log(gameObject.name + " attacked.");
+            attackTimer = 0.0f;
+
+            RaycastHit melee = new RaycastHit();
+            if (Physics.Raycast(transform.position, cam.transform.forward, out melee, 5.0f))
+            {
+                Debug.DrawLine(transform.position, melee.transform.position, Color.cyan, 10f);
+                CmdDoDamage(melee.transform.gameObject, 5);
+            }
+        }
+    }
+
+    [Command]
+    void CmdDoDamage(GameObject t, int dam)
+    {
+        t.transform.SendMessage(("TakeDamage"), dam, SendMessageOptions.DontRequireReceiver);
+    }
+
+    void Timers()
+    {
+        attackTimer -= Time.deltaTime;
     }
 }
