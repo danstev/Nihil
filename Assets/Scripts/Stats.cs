@@ -1,29 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class Stats : MonoBehaviour {
+public class Stats : NetworkBehaviour {
 
+    public Text healthText;
+
+    [SyncVar(hook = "OnChangeHealth")]
     public int health = 0;
+
     public int maxHealth = 100;
-    private bool dead = false;
+    
+
+    //[SyncVar]
+    //private bool dead = false;
 
     // Use this for initialization
     void Start () {
-		
-	}
+        if(isLocalPlayer)
+        healthText.text = "Health: " + health;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        if (dead)
-        {
-            return;
-        }
+
     }
 
     public void TakeDamage(int incoming)
     {
+        
         health -= incoming;
-        Debug.Log("Damage: " + incoming + " has been taken by: " + gameObject.name + ".");
+        
+    }
+
+    public void OnChangeHealth(int health)
+    {
+        if(isLocalPlayer)
+        healthText.text = "Health: " + health;
     }
 }
