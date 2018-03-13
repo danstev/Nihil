@@ -25,6 +25,7 @@ public class PlayerControls : NetworkBehaviour {
 
     //Menu
     public GameObject menu;
+    private bool menuOpen = false;
 
     // Use this for initialization
     void Start() {
@@ -46,7 +47,7 @@ public class PlayerControls : NetworkBehaviour {
             Movement();
             Timers();
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !menuOpen)
             {
                 Attack();
             }
@@ -62,6 +63,7 @@ public class PlayerControls : NetworkBehaviour {
     void MainMenu()
     {
         menu.SetActive(!menu.activeSelf);
+        menuOpen = !menuOpen;
         Debug.Log("Menu opened or closed.");
     }
 
