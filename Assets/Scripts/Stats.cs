@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
@@ -31,6 +32,11 @@ public class Stats : NetworkBehaviour {
     {
         
         health -= incoming;
+
+        if(health <= 0)
+        {
+            Destroy();
+        }
         
     }
 
@@ -38,5 +44,27 @@ public class Stats : NetworkBehaviour {
     {
         if(isLocalPlayer)
         healthText.text = "Health: " + health;
+    }
+
+    public void Destroy()
+    {
+        if(tag == "Enemy")
+        {
+            GetComponent<EnemyAI>().SetDead();
+            StartCoroutine(Fade(GetComponentInChildren<Renderer>()));
+            Destroy(gameObject, 2f);
+        }
+    }
+
+    IEnumerator Fade(Renderer r)
+    {
+        float start = Time.time;
+        while (Time.time <= start + 2f)
+        {
+            Color c = r.material.color;
+            c.a = 1f - Mathf.Clamp01((Time.time - start) / 2f);
+            r.material.color = c;
+            yield return new WaitForEndOfFrame();
+        }
     }
 }
