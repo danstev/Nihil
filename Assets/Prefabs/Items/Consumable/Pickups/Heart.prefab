@@ -35,11 +35,12 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4160202358920860}
-  - component: {fileID: 114648793732613444}
+  - component: {fileID: 114631402457970844}
   - component: {fileID: 136562499235103094}
+  - component: {fileID: 95108456084400904}
   m_Layer: 0
   m_Name: Heart
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +72,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114648793732613444
+--- !u!95 &95108456084400904
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1455608103934078}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e9bb0f46b22c2934bb91bd3ad5ac1852, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114631402457970844
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -79,9 +97,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1455608103934078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8de2b15eab5b98468f444f7dd6662f5, type: 3}
+  m_Script: {fileID: 11500000, guid: c19d0fcc9c8f9ed429df93eca1dcbd20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equipable: 0
+  slotTaken: 0
+  health: 25
+  attack: 0
+  defense: 0
 --- !u!136 &136562499235103094
 CapsuleCollider:
   m_ObjectHideFlags: 1
