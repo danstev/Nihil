@@ -36,6 +36,9 @@ public class PlayerControls : NetworkBehaviour {
             cam.gameObject.SetActive(false);
             gui.gameObject.SetActive(false);
         }
+
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     // Update is called once per frame
@@ -52,6 +55,11 @@ public class PlayerControls : NetworkBehaviour {
                 Attack();
             }
 
+            if (Input.GetKeyDown(KeyCode.E) && !menuOpen)
+            {
+                Interact();
+            }
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 MainMenu();
@@ -62,9 +70,23 @@ public class PlayerControls : NetworkBehaviour {
 
     void MainMenu()
     {
+        CursorSwap();
         menu.SetActive(!menu.activeSelf);
         menuOpen = !menuOpen;
         Debug.Log("Menu opened or closed.");
+    }
+
+    void CursorSwap()
+    {
+        Debug.Log("Cursor lock mode swapped.");
+        if(Cursor.lockState == CursorLockMode.Confined)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
     }
 
     void Movement()
@@ -132,5 +154,23 @@ public class PlayerControls : NetworkBehaviour {
     void Timers()
     {
         attackTimer -= Time.deltaTime;
+    }
+
+    void Interact()
+    {
+        RaycastHit useRange = new RaycastHit();
+        if (Physics.Raycast(transform.position, cam.transform.forward, out useRange, 5.0f))
+        {
+            Debug.DrawLine(transform.position, useRange.transform.position, Color.cyan, 10f);
+            CmdInteract(useRange.transform.gameObject);
+        }
+    }
+
+    [Command]
+    void CmdInteract(GameObject t)
+    {
+        Stats s = GetComponent<Stats>();
+        t.transform.SendMessage(("Interact"), s, SendMessageOptions.DontRequireReceiver);
+        Debug.Log("Interact: " + t.transform.name + ".");
     }
 }
