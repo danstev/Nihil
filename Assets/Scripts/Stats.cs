@@ -19,8 +19,15 @@ public class Stats : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
-        if(isLocalPlayer)
-        healthText.text = "Health: " + health;
+        if (isLocalPlayer)
+        {
+            healthText.text = "Health: " + health;
+            //hover.enabled = false;
+        }
+        else
+        {
+            //hover.enabled = true;
+        }
     }
 	
 	// Update is called once per frame
@@ -38,6 +45,11 @@ public class Stats : NetworkBehaviour {
             Destroy();
         }
         
+    }
+
+    public void RecoverDamage(int incoming)
+    {
+        health += incoming;
     }
 
     public void OnChangeHealth(int health)
