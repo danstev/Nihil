@@ -191,6 +191,8 @@ public class PlayerControls : NetworkBehaviour {
     [Command]
     void CmdSpawn()
     {
+		
         GameObject.Instantiate(spawnable, transform.position + transform.forward * 1, cam.transform.rotation);
+		NetworkServer.Spawn(spawnable, transform.position + transform.forward * 1, cam.transform.rotation);
     }
 }
