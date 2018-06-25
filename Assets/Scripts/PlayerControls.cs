@@ -27,6 +27,9 @@ public class PlayerControls : NetworkBehaviour {
     public GameObject menu;
     private bool menuOpen = false;
 
+    //Game play
+    public GameObject spawnable;
+
     // Use this for initialization
     void Start() {
         cam = GetComponentInChildren<Camera>().transform;
@@ -63,6 +66,11 @@ public class PlayerControls : NetworkBehaviour {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 MainMenu();
+            }
+
+            if (Input.GetKeyDown(KeyCode.T) && !menuOpen)
+            {
+                Spawn();
             }
         }
 
@@ -137,9 +145,9 @@ public class PlayerControls : NetworkBehaviour {
             attackTimer = 0.0f;
 
             RaycastHit melee = new RaycastHit();
-            if (Physics.Raycast(transform.position, cam.transform.forward, out melee, 5.0f))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out melee, 5.0f))
             {
-                Debug.DrawLine(transform.position, melee.transform.position, Color.cyan, 10f);
+                Debug.DrawLine(cam.transform.position, melee.transform.position, Color.cyan, 10f);
                 CmdDoDamage(melee.transform.gameObject, 5);
             }
         }
@@ -159,9 +167,9 @@ public class PlayerControls : NetworkBehaviour {
     void Interact()
     {
         RaycastHit useRange = new RaycastHit();
-        if (Physics.Raycast(transform.position, cam.transform.forward, out useRange, 5.0f))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out useRange, 5.0f))
         {
-            Debug.DrawLine(transform.position, useRange.transform.position, Color.cyan, 10f);
+            Debug.DrawLine(cam.transform.position, useRange.transform.position, Color.cyan, 10f);
             CmdInteract(useRange.transform.gameObject);
         }
     }
@@ -172,5 +180,17 @@ public class PlayerControls : NetworkBehaviour {
         Stats s = GetComponent<Stats>();
         t.transform.SendMessage(("Interact"), s, SendMessageOptions.DontRequireReceiver);
         Debug.Log("Interact: " + t.transform.name + ".");
+    }
+
+    void Spawn()
+    {
+        CmdSpawn();
+        //GameObject.Instantiate(spawnable, transform.position + transform.forward * 1, cam.transform.rotation);
+    }
+
+    [Command]
+    void CmdSpawn()
+    {
+        GameObject.Instantiate(spawnable, transform.position + transform.forward * 1, cam.transform.rotation);
     }
 }
