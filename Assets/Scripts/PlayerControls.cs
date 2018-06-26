@@ -156,7 +156,20 @@ public class PlayerControls : NetworkBehaviour {
     [Command]
     void CmdDoDamage(GameObject t, int dam)
     {
-        t.transform.SendMessage(("TakeDamage"), dam, SendMessageOptions.DontRequireReceiver);
+        //Construct knockback params
+        float[] KnockbackAttack = new float[5];
+
+        //Damage
+        KnockbackAttack[0] = dam;
+        //Pos
+        KnockbackAttack[1] = transform.position.x;
+        KnockbackAttack[2] = transform.position.y;
+        KnockbackAttack[3] = transform.position.z;
+        //Angle
+        //KnockbackAttack[4] = transform.eulerAngles.y;
+
+        //Send
+        t.transform.SendMessage(("CmdTakeDamage"), KnockbackAttack, SendMessageOptions.DontRequireReceiver);
     }
 
     void Timers()
