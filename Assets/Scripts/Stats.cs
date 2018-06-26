@@ -8,6 +8,11 @@ public class Stats : NetworkBehaviour {
 
     public Text healthText;
 
+    //Knockback vars
+    public Rigidbody r;
+    public CharacterController player;
+    public Vector3 imp;
+
     [SyncVar(hook = "OnChangeHealth")]
     public int health = 0;
 
@@ -19,6 +24,8 @@ public class Stats : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
+        imp = Vector3.zero;
+
         if (isLocalPlayer)
         {
             healthText.text = "Health: " + health;
@@ -33,12 +40,41 @@ public class Stats : NetworkBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if(imp.magnitude > 0.2f)
+        {
+            player.Move(imp * Time.deltaTime);
+        }
+        else
+        {
+            imp = Vector3.zero;
+        }
+        imp = Vector3.Lerp(imp, Vector3.zero, 5 * Time.deltaTime);
     }
 
-    public void TakeDamage(int incoming)
+    [Command]
+    public void CmdTakeDamage(float[] incoming)
     {
-        
-        health -= incoming;
+        health -= (int)incoming[0];
+
+        Vector3 p = new Vector3(incoming[1], incoming[2], incoming[3]);
+        p = transform.position - p;
+        p = p.normalized;
+
+        if (r != null)
+        {
+            r.AddForce(p * 12500);
+        }
+        else if(player != null)
+        {
+            if (!isServer)
+            {
+                AddImpact(p);
+            }
+            else
+            {
+                RpcAddImpact(p);
+            }
+        }
 
         if(health <= 0)
         {
@@ -78,5 +114,22 @@ public class Stats : NetworkBehaviour {
             r.material.color = c;
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    private void AddImpact(Vector3 dir)
+    {
+        //dir.Normalize();
+        //if (dir.y < 0) dir.y = -dir.y;
+
+        imp += dir.normalized * 10;
+    }
+
+    [ClientRpc]
+    private void RpcAddImpact(Vector3 dir)
+    {
+        //dir.Normalize();
+        //if (dir.y < 0) dir.y = -dir.y;
+
+        imp += dir.normalized * 10;
     }
 }
