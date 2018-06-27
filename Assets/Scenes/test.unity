@@ -567,11 +567,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthText: {fileID: 0}
+  powerText: {fileID: 0}
   r: {fileID: 1475683985}
   player: {fileID: 0}
-  imp: {x: 0, y: 0, z: 0}
   health: 10
+  power: 0
   maxHealth: 10
+  maxPower: 50
 --- !u!4 &1475683980
 Transform:
   m_ObjectHideFlags: 0
