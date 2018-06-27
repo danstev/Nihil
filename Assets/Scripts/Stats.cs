@@ -7,17 +7,21 @@ using UnityEngine.Networking;
 public class Stats : NetworkBehaviour {
 
     public Text healthText;
+    public Text powerText;
 
     //Knockback vars
     public Rigidbody r;
     public CharacterController player;
-    public Vector3 imp;
+    private Vector3 imp;
 
     [SyncVar(hook = "OnChangeHealth")]
     public int health = 0;
 
+    [SyncVar(hook = "OnChangePower")]
+    public int power = 0;
+
     public int maxHealth = 100;
-    
+    public int maxPower = 50;
 
     //[SyncVar]
     //private bool dead = false;
@@ -29,6 +33,7 @@ public class Stats : NetworkBehaviour {
         if (isLocalPlayer)
         {
             healthText.text = "Health: " + health;
+            powerText.text = "Power: " + power;
             //hover.enabled = false;
         }
         else
@@ -91,7 +96,13 @@ public class Stats : NetworkBehaviour {
     public void OnChangeHealth(int health)
     {
         if(isLocalPlayer)
-        healthText.text = "Health: " + health;
+            healthText.text = "Health: " + health;
+    }
+
+    public void OnChangePower(int power)
+    {
+        if (isLocalPlayer)
+            powerText.text = "Power: " + power;
     }
 
     public void Destroy()
