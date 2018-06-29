@@ -9,16 +9,6 @@ public class Item : MonoBehaviour {
 
     public int health, attack, defense; 
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     void Use()
     {
         if(equipable)
