@@ -10,12 +10,6 @@ public class EnemyAI : MonoBehaviour {
     public int damage;
     public bool dead;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
 	void Update () {
 
         if (dead)
