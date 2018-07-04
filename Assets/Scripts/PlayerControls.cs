@@ -190,8 +190,9 @@ public class PlayerControls : NetworkBehaviour {
     [Command]
     void CmdInteract(GameObject t)
     {
-        Stats s = GetComponent<Stats>();
-        t.transform.SendMessage(("Interact"), s, SendMessageOptions.DontRequireReceiver);
+        //Stats s = GetComponent<Stats>();
+        t.transform.SendMessage(("Interact"), gameObject, SendMessageOptions.DontRequireReceiver);
+        Debug.Log(gameObject.name);
         Debug.Log("Interact: " + t.transform.name + ".");
     }
 
