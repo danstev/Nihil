@@ -11,29 +11,16 @@ public class Item : MonoBehaviour {
 
     void Use()
     {
-        if(equipable)
-        {
-            //Equipment/Armour
-            if(slotTaken == 0) 
-            {
-                //Weapon
-            }
-            else if(slotTaken == 2)
-            {
-                //Armour
-            }
-        }
-        else
-        {
-            //Consumable
 
-        }
     }
 
-    public void Interact(Stats s)
+    public void Interact(GameObject go)
     {
+        Stats s = go.GetComponent<Stats>();
         s.RecoverDamage(10);
         Destroy(gameObject);
         Debug.Log("Destroying self.");
     }
+
+    
 }
