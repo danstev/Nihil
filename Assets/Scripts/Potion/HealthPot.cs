@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class HealthPot : Item {
 
-    public void Interact(Stats s)
+    public new void Interact(GameObject go)
     {
+        Stats s = go.GetComponent<Stats>();
         s.RecoverDamage(10);
         Destroy(gameObject);
         Debug.Log("Destroying self.");
