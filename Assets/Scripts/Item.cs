@@ -7,7 +7,7 @@ public class Item : MonoBehaviour {
     public bool equipable;
     public int slotTaken;
 
-    public int health, attack, defense; 
+    public int health, power, attack, defense; 
 
     void Use()
     {
