@@ -29,9 +29,11 @@ public class PlayerControls : NetworkBehaviour {
 
     //Game play
     public GameObject spawnable;
+    public Stats statistics;
 
     // Use this for initialization
     void Start() {
+        statistics = GetComponent<Stats>();
         cam = GetComponentInChildren<Camera>().transform;
         gui = transform.Find("GUI");
         if (!isLocalPlayer)
@@ -148,7 +150,7 @@ public class PlayerControls : NetworkBehaviour {
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out melee, 5.0f))
             {
                 Debug.DrawLine(cam.transform.position, melee.transform.position, Color.cyan, 10f);
-                CmdDoDamage(melee.transform.gameObject, 5);
+                CmdDoDamage(melee.transform.gameObject, statistics.attack);
             }
         }
     }
