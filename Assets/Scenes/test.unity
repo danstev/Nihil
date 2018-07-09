@@ -123,9 +123,10 @@ GameObject:
   - component: {fileID: 10419887}
   - component: {fileID: 10419886}
   - component: {fileID: 10419885}
+  - component: {fileID: 10419888}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -241,6 +242,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &10419888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 10419884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d8d0472b2903e649b55833c3664df81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ps:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &23264007 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4026424437668220, guid: 7bcb7a264aa112745b4f96e0f3927b56,
@@ -589,6 +610,52 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7bcb7a264aa112745b4f96e0f3927b56, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &415970354
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1519046052787978, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &440032388 stripped
 Transform:
@@ -1366,52 +1433,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4026424437668220, guid: 7bcb7a264aa112745b4f96e0f3927b56,
     type: 2}
   m_PrefabInternal: {fileID: 873095969}
---- !u!1001 &1147392625
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4235634989621416, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1519046052787978, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: c62d2882a517eef408a93ab5d88a4440, type: 2}
-  m_IsPrefabParent: 0
 --- !u!4 &1226568418 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4026424437668220, guid: 7bcb7a264aa112745b4f96e0f3927b56,
@@ -1596,10 +1617,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1307805774}
-  - component: {fileID: 1307805772}
   - component: {fileID: 1307805773}
   - component: {fileID: 1307805776}
   - component: {fileID: 1307805775}
+  - component: {fileID: 1307805772}
   m_Layer: 0
   m_Name: Sword (1)
   m_TagString: Untagged
@@ -1617,7 +1638,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.2
+  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1307805773
@@ -1633,9 +1654,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipable: 1
   slotTaken: 1
-  health: 0
+  health: 10
+  power: 10
   attack: 17
-  defense: 0
+  defense: 10
 --- !u!4 &1307805774
 Transform:
   m_ObjectHideFlags: 0
@@ -1662,7 +1684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 1
-  m_SendInterval: 0.04347826
+  m_SendInterval: 0.033333335
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
@@ -1670,7 +1692,7 @@ MonoBehaviour:
   m_VelocityThreshold: 0.0001
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
+  m_InterpolateMovement: 5
 --- !u!114 &1307805776
 MonoBehaviour:
   m_ObjectHideFlags: 0
