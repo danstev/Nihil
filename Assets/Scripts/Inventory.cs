@@ -8,4 +8,10 @@ public class Inventory : MonoBehaviour {
 
     public GameObject weapon, spell, armour;
 
+    public void WeaponUnequip()
+    {
+        Weapon w = weapon.GetComponent<Weapon>();
+        w.Unequip(gameObject);
+    }
+
 }
