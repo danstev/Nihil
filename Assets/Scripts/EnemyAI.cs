@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour {
+public class EnemyAI : NetworkBehaviour {
 
     public Transform target = null;
     private float tempTimer;
@@ -11,6 +12,9 @@ public class EnemyAI : MonoBehaviour {
     public bool dead;
 
 	void Update () {
+
+        if (!isServer)
+            return;        
 
         if (dead)
             return;
@@ -73,8 +77,28 @@ public class EnemyAI : MonoBehaviour {
         }
         else if (reach > Vector3.Distance(transform.position, target.transform.position))
         {
-            target.transform.SendMessage(("TakeDamage"), damage, SendMessageOptions.DontRequireReceiver);
+            CmdDoDamage(target.gameObject, damage);
+            //target.transform.SendMessage(("TakeDamage"), damage, SendMessageOptions.DontRequireReceiver);
         }
+    }
+
+    [Command]
+    void CmdDoDamage(GameObject t, int dam)
+    {
+        //Construct knockback params
+        float[] KnockbackAttack = new float[5];
+
+        //Damage
+        KnockbackAttack[0] = dam;
+        //Pos
+        KnockbackAttack[1] = transform.position.x;
+        KnockbackAttack[2] = transform.position.y;
+        KnockbackAttack[3] = transform.position.z;
+        //Angle
+        //KnockbackAttack[4] = transform.eulerAngles.y;
+
+        //Send
+        t.transform.SendMessage(("CmdTakeDamage"), KnockbackAttack, SendMessageOptions.DontRequireReceiver);
     }
 
     public void SetDead()
