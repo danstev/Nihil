@@ -74,6 +74,12 @@ public class PlayerControls : NetworkBehaviour {
             {
                 Spawn();
             }
+
+            if (Input.GetKeyDown(KeyCode.U) && !menuOpen)
+            {
+                Inventory i = GetComponent<Inventory>();
+                i.WeaponUnequip();
+            }
         }
 
     }
