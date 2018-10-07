@@ -32,6 +32,8 @@ public class Stats : NetworkBehaviour {
     public int attack = 0;
     public int otherattack = 0;
 
+    public AudioSource TakeDamageAudioSource;
+
     public int defense = 0;
     public int otherDefense = 0;
 
@@ -114,6 +116,7 @@ public class Stats : NetworkBehaviour {
     {
         int dmg = ((int)incoming[0] - defense);
         health -= dmg;
+        TakeDamageAudioSource.Play(); 
         Debug.Log(gameObject.name + "has taken " + dmg + " damage.");
 
         Vector3 p = new Vector3(incoming[1], incoming[2], incoming[3]);
