@@ -115,7 +115,7 @@ public class Stats : NetworkBehaviour {
     public void CmdTakeDamage(float[] incoming)
     {
         int dmg = ((int)incoming[0] - defense);
-        health -= dmg;
+        //health -= dmg;
         TakeDamageAudioSource.Play(); 
         Debug.Log(gameObject.name + "has taken " + dmg + " damage.");
 
@@ -143,7 +143,21 @@ public class Stats : NetworkBehaviour {
         {
             Destroy();
         }
-        
+
+        RpcTakeDamage(dmg);
+    }
+
+    [ClientRpc]
+    public void RpcTakeDamage(int dmg)
+    {
+        health -= dmg;
+        TakeDamageAudioSource.Play();
+
+        if (health <= 0)
+        {
+            Destroy();
+        }
+
     }
 
     public void RecoverDamage(int incoming)
@@ -171,7 +185,7 @@ public class Stats : NetworkBehaviour {
             //Add exp to near players
             GameObject game = GameObject.FindGameObjectWithTag("GameManager");
             GameManager gm = game.GetComponent<GameManager>();
-            gm.AddExp(expGranted);
+            gm.RpcAddExp(expGranted);
 
             //Fade, not workin :p
             if (tag == "Enemy")
