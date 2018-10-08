@@ -182,7 +182,7 @@ MonoBehaviour:
     i14: 46
     i15: 253
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114709718098621274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -201,6 +201,7 @@ MonoBehaviour:
   attack: 1
   defense: 0
   anim: {fileID: 95022539005886462}
+  state: 
 --- !u!114 &114836392928467676
 MonoBehaviour:
   m_ObjectHideFlags: 1
