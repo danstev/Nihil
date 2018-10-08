@@ -9,10 +9,30 @@ public class PlayerStats : Stats
     public int experience;
     public int expToGo;
 
-    //[SyncVar(hook = "AddExp")]
+    [SyncVar(hook = "AddExp")]
     public int level;
-	
-	void Start () {
+
+    /*
+    void OnStartLocalPlayer()
+    {
+        gameObject.name = netId.ToString();
+        Debug.Log("Hellolooooooooo");
+        GameObject gm = GameObject.Find("GameManager");
+        GameManager gamemanager = gm.GetComponent<GameManager>();
+        gamemanager.AddPlayer(this.gameObject);
+    }
+    */
+
+    void OnConnectedToServer()
+    {
+        gameObject.name = netId.ToString();
+        Debug.Log("Hellolooooooooo");
+        GameObject gm = GameObject.Find("GameManager");
+        GameManager gamemanager = gm.GetComponent<GameManager>();
+        gamemanager.AddPlayer(this);
+    }
+
+    void Start () {
         imp = Vector3.zero;
 
         if (isLocalPlayer)
@@ -81,8 +101,5 @@ public class PlayerStats : Stats
         SetExpToGo();
     }
 
-    private void OnConnectedToServer()
-    {
-        
-    }
+    
 }
