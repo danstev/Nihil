@@ -8,7 +8,8 @@ public class GameManager : NetworkBehaviour
 {
     public PlayerStats[] ps = new PlayerStats[8]; //Amount of players here;
 
-    public void AddExp(int exp)
+    [ClientRpc]
+    public void RpcAddExp(int exp)
     {
         foreach(PlayerStats p in ps)
         {
@@ -25,6 +26,12 @@ public class GameManager : NetworkBehaviour
 
     void OnStart()
     {
+        if(isServer)
+        {
+            Destroy(this);
+            return;
+        }
+
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         int count = 0;
         foreach(GameObject player in players)
@@ -40,6 +47,18 @@ public class GameManager : NetworkBehaviour
         for (int i = 0; i < 8; i++)
         {
             if(ps[i] == null)
+            {
+                ps[i] = p;
+                break;
+            }
+        }
+    }
+
+    public void AddPlayer(PlayerStats p)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if (ps[i] == null)
             {
                 ps[i] = p;
                 break;
