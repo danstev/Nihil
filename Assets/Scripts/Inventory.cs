@@ -17,4 +17,11 @@ public class Inventory : NetworkBehaviour {
         w.CmdUnequip(gameObject);
     }
 
+    public float ATK()
+    {
+        Weapon w = weapon.GetComponent<Weapon>();
+        w.CmdStartAttack();
+        return w.atkTime;
+    }
+
 }
