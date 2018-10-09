@@ -17621,7 +17621,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1705277741
 Transform:
   m_ObjectHideFlags: 0
@@ -18310,7 +18310,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114433549119023652, guid: 51aa8f3cc693098439be118343782efd,
+        type: 2}
+      propertyPath: attack
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114709718098621274, guid: 51aa8f3cc693098439be118343782efd,
+        type: 2}
+      propertyPath: atkTime
+      value: 0.7
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 51aa8f3cc693098439be118343782efd, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &2111876098
