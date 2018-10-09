@@ -7,6 +7,8 @@ public class Weapon : Item {
 
     public int health, power, attack, defense;
     public Animator anim;
+    public float atkTime, attackTimer;
+    public WeaponCollision c;
 
     [SyncVar(hook = "OnChangeState")]
     public string state = ""; //spin, idle, attack'1,2,3' etc
@@ -16,6 +18,23 @@ public class Weapon : Item {
     {
         state = "spin";
         anim.PlayInFixedTime("spin", -1, 0);
+    }
+
+    public void Update()
+    {
+        Timers();
+    }
+
+    void Timers()
+    {
+        if (attackTimer > 0)
+        {
+            attackTimer -= Time.deltaTime;
+            if (attackTimer <= 0)
+            {
+                CmdStopAttack();
+            }
+        }
     }
 
     [Command]
@@ -161,6 +180,34 @@ public class Weapon : Item {
         state = "spin";
     }
 
+    [Command]
+    public void CmdStartAttack()
+    {
+        state = "attack";
+        attackTimer = atkTime;
+        RpcStartAttack();
+    }
+
+    [Command]
+    public void CmdStopAttack()
+    {
+        state = "idle";
+        RpcStopAttack();
+    }
+
+    [ClientRpc]
+    public void RpcStartAttack()
+    {
+        state = "attack";
+        attackTimer = atkTime;
+    }
+
+    [ClientRpc]
+    public void RpcStopAttack()
+    {
+        state = "idle";
+    }
+
     public void OnChangeState(string s)
     {
         state = s;
@@ -168,14 +215,16 @@ public class Weapon : Item {
         {
             case "spin":
                 anim.PlayInFixedTime("spin", -1, 0);
-                
                 break;
             case "idle":
                 anim.PlayInFixedTime("idle", -1, 0);
                 break;
             case "attack":
-                //change anim. anythin else?
+                anim.PlayInFixedTime("attack1", -1, 0);
                 break;
         }
     }
+
+    
 }
+
