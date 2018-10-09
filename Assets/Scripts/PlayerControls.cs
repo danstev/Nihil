@@ -149,6 +149,7 @@ public class PlayerControls : NetworkBehaviour {
     {
         if (attackTimer <= 0)
         {
+            /*
             Debug.Log(gameObject.name + " attacked.");
             attackTimer = 0.0f;
 
@@ -157,7 +158,11 @@ public class PlayerControls : NetworkBehaviour {
             {
                 Debug.DrawLine(cam.transform.position, melee.transform.position, Color.cyan, 10f);
                 CmdDoDamage(melee.transform.gameObject, statistics.attack);
-            }
+            } OLD
+            */
+
+            Inventory i = GetComponent<Inventory>();
+            attackTimer = i.ATK();
         }
     }
 
